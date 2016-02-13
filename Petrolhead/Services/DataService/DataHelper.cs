@@ -27,10 +27,7 @@ namespace Petrolhead.Services.DataService
             await App.MobileService.GetTable<Vehicle>().UpdateAsync(v);
         }
 
-        public static async Task RefreshTableAsync()
-        {
-           
-        }
+       
 
         public static async Task<ObservableCollection<Vehicle>> GetObservableCollectionAsync()
         {
