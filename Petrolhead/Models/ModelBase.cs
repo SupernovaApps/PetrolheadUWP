@@ -18,7 +18,7 @@ namespace Petrolhead.Models
         /// </summary>
         public ModelBase()
         {
-            ResetID();
+            
             CreationDate = DateTime.Today;
             this.PropertyChanged += ModelBase_PropertyChanged;
         }
@@ -33,19 +33,8 @@ namespace Petrolhead.Models
             ModifiedDate = DateTime.Now;
         }
 
-        /// <summary>
-        /// Generates a new GUID, and assigns it to the ID property.
-        /// </summary>
-        protected virtual void ResetID()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-
-        private string _ID = default(string);
-        /// <summary>
-        /// A unique identifier for a data model.
-        /// </summary>
-        public string Id { get { return _ID; } protected set { Set(ref _ID, value); } }
+       
+       
 
         private string _Name = default(string);
         /// <summary>

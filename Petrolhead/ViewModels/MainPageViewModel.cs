@@ -34,20 +34,19 @@ namespace Petrolhead.ViewModels
                 Value = state[nameof(Value)]?.ToString();
                 state.Clear();
             }
-            if (await AuthHelper.AuthenticateAsync())
+            if (await AuthHelper.AuthenticateAsync(Microsoft.WindowsAzure.MobileServices.MobileServiceAuthenticationProvider.MicrosoftAccount))
             {
-                Debug.WriteLine("Authentication success");
+
             }
             else
             {
-                MessageDialog dialog = new MessageDialog("Your identity could not be verified. You need to sign in with your Microsoft Account to use Petrolhead.");
+                MessageDialog dialog = new MessageDialog("You'll need to sign in with your Microsoft account to use Petrolhead.");
                 dialog.Commands.Add(new UICommand("Exit", (command) =>
                 {
                     BootStrapper.Current.Exit();
                 }));
                 await dialog.ShowAsync();
             }
-
         }
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)

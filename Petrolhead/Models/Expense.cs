@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Petrolhead.Models
 {
+    /// <summary>
+    /// Data model representing an expense
+    /// </summary>
     public class Expense : ModelBase
     {
+        private string _id = default(string);
+        public string Id { get { return _id; } set { Set(ref _id, value); } }
+
         private DateTimeOffset _TransactionDate = default(DateTimeOffset);
         public DateTimeOffset TransactionDate { get { return _TransactionDate; } set { Set(ref _TransactionDate, value); } }
 

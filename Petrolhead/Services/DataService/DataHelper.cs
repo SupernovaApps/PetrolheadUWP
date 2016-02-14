@@ -27,7 +27,13 @@ namespace Petrolhead.Services.DataService
             await App.MobileService.GetTable<Vehicle>().UpdateAsync(v);
         }
 
-       
+       public static async Task BatchAddAsync(IEnumerable<Vehicle> list)
+        {
+            foreach (var item in list)
+            {
+                await AddVehicleAsync(item);
+            }
+        }
 
         public static async Task<ObservableCollection<Vehicle>> GetObservableCollectionAsync()
         {

@@ -13,6 +13,8 @@ namespace Petrolhead.Models
     public enum ReminderState { Disabled, Active, Due, Overdue, Completed }
     public class Reminder : ModelBase
     {
+        private string _id = default(string);
+        public string Id { get { return _id; } set { Set(ref _id, value); } }
         private ulong _MileageTrigger = default(ulong);
         public ulong DueMileage
         {

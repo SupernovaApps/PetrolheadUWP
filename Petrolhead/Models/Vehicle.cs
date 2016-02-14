@@ -148,5 +148,8 @@ namespace Petrolhead.Models
                 Set(ref _Reminders, value);
             }
         }
+
+        private ulong _Mileage = default(ulong);
+        public ulong Mileage { get { return _Mileage; } set { Set(ref _Mileage, value); } }
     }
 }

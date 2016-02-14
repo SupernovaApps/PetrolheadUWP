@@ -11,19 +11,22 @@ namespace UWPBackend.DataObjects
         public ulong TotalCost { get; set; }
         public DateTimeOffset TransactionDate { get; set; }
         public ulong Mileage { get; set; }
+       
         
 
     }
 
+    public enum ReminderState { Inactive, Active, Due, Overdue, Completed }
  
     public class Reminder : EntityData
     {
         public string Name { get; set; }
-       public DateTimeOffset DueDate { get; set; }
+       public TimeSpan DueDate { get; set; }
+        public ReminderState State { get; set; }
        public ulong DueMileage { get; set; }
         public string Description { get; set; }
         public ulong Importance { get; set; }
-
+        public ulong CompletionLevel { get; set; }
     }
 
     public class Vehicle : EntityData
@@ -37,11 +40,13 @@ namespace UWPBackend.DataObjects
         public ulong YearOfPurchase { get; set; }
         public ulong TotalCost { get; set; }
         public ulong BudgetMaximum { get; set; }
+        public ulong Mileage { get; set; }
         public DateTimeOffset LastWarrantDate { get; set; }
         public DateTimeOffset NextWarrantDate { get; set; }
         public DateTimeOffset LastRegoDate { get; set; }
         public DateTimeOffset NextRegoDate { get; set; }
         public List<Expense> Expenses { get; set; }
         public List<Reminder> Reminders { get; set; }
+       
     }
 }

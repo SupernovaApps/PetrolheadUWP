@@ -7,6 +7,7 @@ using Template10.Utils;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.ApplicationInsights;
 using Microsoft.WindowsAzure.MobileServices;
+using Petrolhead.Services.AuthenticationService;
 
 namespace Petrolhead
 {
@@ -68,15 +69,15 @@ new MobileServiceClient(
         private static TelemetryClient _Telemetry;
         public static TelemetryClient Telemetry { get { return _Telemetry; } set { _Telemetry = value; } }
         // runs only when not restored from state
-        public override Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
+        public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
 
             // set hamburger menu to full screen mode on Mobile devices.
             if (DeviceUtils.Current().IsPhone())
                 Views.Shell.HamburgerMenu.IsFullScreen = true;
 
-            NavigationService.Navigate(typeof(Views.MainPage));
-            return Task.CompletedTask;
+            
+            
         }
     }
 }

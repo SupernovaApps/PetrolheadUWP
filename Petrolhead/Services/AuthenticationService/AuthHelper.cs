@@ -17,14 +17,28 @@ namespace Petrolhead.Services.AuthenticationService
             set { user = value; }
         }
 
+        public static async Task<bool> AuthenticateAsync(MobileServiceAuthenticationProvider provider)
+        {
+            bool success = false;
+            if (await GetSavedAuthenticationAsync(provider))
+            {
+                success = true;
+                return success;
+            }
+            else
+            {
+                success = await SignInAsync(provider);
+            }
+            return success;
+        }
        
-        public static async Task<bool> AuthenticateAsync()
+        public static Task<bool> GetSavedAuthenticationAsync(MobileServiceAuthenticationProvider provider)
         {
             bool success = false;
             PasswordVault vault = new PasswordVault();
             PasswordCredential credential = null;
 
-            var provider = MobileServiceAuthenticationProvider.MicrosoftAccount;
+            
 
             try
             {
@@ -46,27 +60,36 @@ namespace Petrolhead.Services.AuthenticationService
             }
             else
             {
-                try
-                {
-                    User = await App.MobileService.LoginAsync(MobileServiceAuthenticationProvider.MicrosoftAccount, true);
-                    // Create and store the user credentials.
-                    credential = new PasswordCredential(provider.ToString(),
-                        user.UserId, user.MobileServiceAuthenticationToken);
-                    vault.Add(credential);
-                    success = true;
-                }
-                catch (MobileServiceInvalidOperationException)
-                {
-                    
-                }
-                catch (InvalidOperationException)
-                {
-
-                }
+                
             }
 
-            return success;
+            return Task.FromResult<bool>(success);
            
         }
+
+        public static async Task<bool> SignInAsync(MobileServiceAuthenticationProvider provider)
+        {
+            bool success = false;
+            try
+            {
+                PasswordVault vault = new PasswordVault();
+                PasswordCredential credential = null;
+                User = await App.MobileService.LoginAsync(provider, true);
+                // Create and store the user credentials.
+                credential = new PasswordCredential(provider.ToString(),
+                    user.UserId, user.MobileServiceAuthenticationToken);
+                vault.Add(credential);
+                success = true;
+            }
+            catch (MobileServiceInvalidOperationException)
+            {
+
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+            return success;
+        } 
     }
 }
