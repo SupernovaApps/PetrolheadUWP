@@ -26,5 +26,7 @@ namespace Petrolhead.Views
         {
             this.InitializeComponent();
         }
+
+        public ViewModels.LoginPageViewModel ViewModel => this.DataContext as ViewModels.LoginPageViewModel;
     }
 }

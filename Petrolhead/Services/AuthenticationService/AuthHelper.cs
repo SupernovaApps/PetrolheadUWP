@@ -113,7 +113,8 @@ namespace Petrolhead.Services.AuthenticationService
         }
         public static bool IsCachedCredentialsAvailable(PasswordCredential credential)
         {
-            
+            if (credential == null)
+                return false;
                 var user = new MobileServiceUser(credential.UserName);
                 credential.RetrievePassword();
                 user.MobileServiceAuthenticationToken = credential.Password;
@@ -158,6 +159,8 @@ namespace Petrolhead.Services.AuthenticationService
        
         public static async Task<bool> AuthenticateAsync()
         {
+
+            
             bool success = false;
             PasswordVault vault = new PasswordVault();
             PasswordCredential credential = null;

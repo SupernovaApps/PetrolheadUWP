@@ -112,6 +112,7 @@
     <Compile Include="Repositories\VehicleRepository.cs" />
     <Compile Include="Services\AuthenticationService\AuthHelper.cs" />
     <Compile Include="Services\DataService\DataHelper.cs" />
+    <Compile Include="Services\DeviceInfoService\DeviceInfoHelper.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\ExpenseViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
@@ -200,6 +201,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="Microsoft.VCLibs, Version=14.0">
+      <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
+    </SDKReference>
     <SDKReference Include="SQLite.UAP.2015, Version=3.10.2">
       <Name>SQLite for Universal App Platform</Name>
     </SDKReference>

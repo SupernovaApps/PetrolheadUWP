@@ -120,8 +120,8 @@ namespace Petrolhead.Models
         private DateTimeOffset _NextRegoDate = default(DateTimeOffset);
         public DateTimeOffset NextRegoDate
         {
-            get { return _NextWarrantDate; }
-            set { Set(ref _NextWarrantDate, value); }
+            get { return _NextRegoDate; }
+            set { Set(ref _NextRegoDate, value); }
         }
         private List<Expense> _Expenses = default(List<Expense>);
         public List<Expense> Expenses
