@@ -19,10 +19,13 @@
         </Grid.RowDefinitions>
         <controls:PageHeader Text="Sign In" />
         <RelativePanel Grid.Row="1" Margin="0,30,0,0">
-            <TextBlock x:Name="Header" RelativePanel.AlignHorizontalCenterWithPanel="True" TextWrapping="Wrap">
-                Welcome to Petrolhead! <LineBreak /> In order to use Petrolhead, you'll need to sign in using your Microsoft Account. That's the one you use to download apps on your device.
+            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" x:Name="Header" RelativePanel.AlignHorizontalCenterWithPanel="True">
+               Welcome to Petrolhead!                    
             </TextBlock>
-            <Button x:Name="Authenticate" Click="{x:Bind ViewModel.Login}" IsEnabled="{Binding IsLoginBtnEnabled, UpdateSourceTrigger=PropertyChanged}" RelativePanel.Below="Header" RelativePanel.AlignHorizontalCenterWith="Header">
+            <TextBlock x:Name="Details" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="Header" TextWrapping="Wrap">
+                <LineBreak /> In order to use Petrolhead, you'll need to sign in using your Microsoft Account. That's the one you use to download apps on your device.
+            </TextBlock>
+            <Button x:Name="Authenticate" Click="{x:Bind ViewModel.Login}" IsEnabled="{Binding IsLoginBtnEnabled, UpdateSourceTrigger=PropertyChanged}" RelativePanel.Below="Details" RelativePanel.AlignHorizontalCenterWith="Header">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Symbol="Account" />

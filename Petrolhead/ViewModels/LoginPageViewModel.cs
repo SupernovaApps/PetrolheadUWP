@@ -22,14 +22,14 @@ namespace Petrolhead.ViewModels
 
         private void Instance_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (DeviceInfoHelper.Instance.Connectivity == NetworkConnectivityLevel.InternetAccess)
+            if (DeviceInfoHelper.Instance.HasInternet)
             {
                 ErrorText = "";
                 IsLoginBtnEnabled = true;
             }
             else
             {
-                ErrorText = "You must have an Internet connection to sign in.";
+                ErrorText = "You must be connected to the Internet to sign in.";
                 IsLoginBtnEnabled = false;
             }
 
@@ -37,29 +37,14 @@ namespace Petrolhead.ViewModels
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            if (DeviceInfoHelper.Instance.Connectivity == NetworkConnectivityLevel.InternetAccess)
+            if (DeviceInfoHelper.Instance.HasInternet)
             {
                 ErrorText = "";
                 IsLoginBtnEnabled = true;
             }
-            else if (DeviceInfoHelper.Instance.Connectivity == NetworkConnectivityLevel.LocalAccess || DeviceInfoHelper.Instance.Connectivity == NetworkConnectivityLevel.ConstrainedInternetAccess)
-            {
-                if (DeviceUtils.Current().IsPhone() || DeviceUtils.Current().IsContinuum())
-                {
-                    if (NetworkInformation.GetInternetConnectionProfile().IsWwanConnectionProfile)
-                    {
-                        ErrorText = "Your 3G/LTE connection appears to be flaky. Please try again later.";
-                        IsLoginBtnEnabled = false;
-                        return Task.CompletedTask;
-                    }
-
-                }
-                ErrorText = "Petrolhead cannot connect to the login server. Please try again later.";
-                IsLoginBtnEnabled = false;
-            }
             else
             {
-                ErrorText = "You're not connected to a network. Please connect to a network to sign in.";
+                ErrorText = "You must be connected to the Internet to sign in.";
                 IsLoginBtnEnabled = false;
             }
             return Task.CompletedTask;

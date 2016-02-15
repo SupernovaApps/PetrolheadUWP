@@ -27,32 +27,34 @@ namespace Petrolhead.Services.DeviceInfoService
 
         }
        
-
-        private static void NetworkInformation_NetworkStatusChanged(object sender)
+        public DeviceInfoHelper()
         {
-            Instance.Connectivity = (NetworkInformation.GetInternetConnectionProfile()).GetNetworkConnectivityLevel();
+            NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
         }
 
-        private  NetworkConnectivityLevel _connectivity = (NetworkInformation.GetInternetConnectionProfile()).GetNetworkConnectivityLevel();
-        public  NetworkConnectivityLevel Connectivity
+        private void NetworkInformation_NetworkStatusChanged(object sender)
+        {
+            GetConnectionStatus();
+        }
+
+        protected virtual void GetConnectionStatus()
+        {
+            Instance.HasInternet = ((NetworkInformation.GetInternetConnectionProfile()) != null && (NetworkInformation.GetInternetConnectionProfile()).GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess);
+        }
+
+        private bool _HasInternet = ((NetworkInformation.GetInternetConnectionProfile()) != null && (NetworkInformation.GetInternetConnectionProfile()).GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess);
+        public bool HasInternet
         {
             get
             {
-                return _connectivity;
+                return _HasInternet;
             }
             protected set
             {
-                Set(ref _connectivity, value);
-                
+                Set(ref _HasInternet, value);
             }
         }
-        
 
-private bool HasInternet()
-        {
-            var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
-            return (connectionProfile != null &&
-                    connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess);
-        }
+
     }
 }
