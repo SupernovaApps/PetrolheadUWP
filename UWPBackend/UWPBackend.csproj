@@ -17,8 +17,8 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
+    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <ApplicationInsightsResourceId>/subscriptions/7b82bb18-05f2-4597-a49a-ec817330bf72/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/UWPBackend</ApplicationInsightsResourceId>

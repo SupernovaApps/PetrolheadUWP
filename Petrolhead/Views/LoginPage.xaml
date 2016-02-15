@@ -22,7 +22,7 @@
             <TextBlock x:Name="Header" RelativePanel.AlignHorizontalCenterWithPanel="True" TextWrapping="Wrap">
                 Welcome to Petrolhead! <LineBreak /> In order to use Petrolhead, you'll need to sign in using your Microsoft Account. That's the one you use to download apps on your device.
             </TextBlock>
-            <Button x:Name="Authenticate" Click="{x:Bind ViewModel.Login}" RelativePanel.Below="Header" RelativePanel.AlignHorizontalCenterWith="Header">
+            <Button x:Name="Authenticate" Click="{x:Bind ViewModel.Login}" IsEnabled="{Binding IsLoginBtnEnabled, UpdateSourceTrigger=PropertyChanged}" RelativePanel.Below="Header" RelativePanel.AlignHorizontalCenterWith="Header">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon Symbol="Account" />
@@ -30,6 +30,7 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
+            <TextBlock RelativePanel.Below="Authenticate" RelativePanel.AlignHorizontalCenterWith="Authenticate" Text="{Binding ErrorText, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" />
         </RelativePanel>
     </Grid>
 </Page>

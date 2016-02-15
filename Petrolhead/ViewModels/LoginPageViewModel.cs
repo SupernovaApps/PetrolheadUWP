@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
+using Template10.Utils;
 using Windows.Networking.Connectivity;
+using Windows.UI.Xaml.Navigation;
 
 namespace Petrolhead.ViewModels
 {
@@ -23,8 +25,44 @@ namespace Petrolhead.ViewModels
             if (DeviceInfoHelper.Instance.Connectivity == NetworkConnectivityLevel.InternetAccess)
             {
                 ErrorText = "";
+                IsLoginBtnEnabled = true;
+            }
+            else
+            {
+                ErrorText = "You must have an Internet connection to sign in.";
+                IsLoginBtnEnabled = false;
             }
 
+        }
+
+        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        {
+            if (DeviceInfoHelper.Instance.Connectivity == NetworkConnectivityLevel.InternetAccess)
+            {
+                ErrorText = "";
+                IsLoginBtnEnabled = true;
+            }
+            else if (DeviceInfoHelper.Instance.Connectivity == NetworkConnectivityLevel.LocalAccess || DeviceInfoHelper.Instance.Connectivity == NetworkConnectivityLevel.ConstrainedInternetAccess)
+            {
+                if (DeviceUtils.Current().IsPhone() || DeviceUtils.Current().IsContinuum())
+                {
+                    if (NetworkInformation.GetInternetConnectionProfile().IsWwanConnectionProfile)
+                    {
+                        ErrorText = "Your 3G/LTE connection appears to be flaky. Please try again later.";
+                        IsLoginBtnEnabled = false;
+                        return Task.CompletedTask;
+                    }
+
+                }
+                ErrorText = "Petrolhead cannot connect to the login server. Please try again later.";
+                IsLoginBtnEnabled = false;
+            }
+            else
+            {
+                ErrorText = "You're not connected to a network. Please connect to a network to sign in.";
+                IsLoginBtnEnabled = false;
+            }
+            return Task.CompletedTask;
         }
 
         private bool? _IsLoginBtnEnabled = false;

@@ -9,6 +9,7 @@ using UWPBackend.Models;
 
 namespace UWPBackend.Controllers
 {
+    [Authorize]
     public class VehicleController : TableController<Vehicle>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
