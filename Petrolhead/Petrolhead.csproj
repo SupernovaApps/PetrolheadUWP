@@ -114,6 +114,7 @@
     <Compile Include="Services\DataService\DataHelper.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\ExpenseViewModel.cs" />
+    <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\DetailPageViewModel.cs" />
     <Compile Include="ViewModels\ReminderViewModel.cs" />
@@ -124,6 +125,9 @@
     </Compile>
     <Compile Include="Views\DetailPage.xaml.cs">
       <DependentUpon>DetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -174,6 +178,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -191,7 +199,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SDKReference Include="SQLite.UAP.2015, Version=3.10.2">
+      <Name>SQLite for Universal App Platform</Name>
+    </SDKReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

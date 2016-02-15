@@ -76,6 +76,16 @@ new MobileServiceClient(
             if (DeviceUtils.Current().IsPhone())
                 Views.Shell.HamburgerMenu.IsFullScreen = true;
 
+            if (!AuthHelper.IsCachedCredentialsAvailable())
+            {
+                NavigationService.Navigate(typeof(Views.LoginPage));
+            }
+            else
+            {
+                await AuthHelper.AuthenticateAsync();
+                NavigationService.Navigate(typeof(Views.MainPage));
+            }
+            
             
             
         }
