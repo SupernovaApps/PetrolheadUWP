@@ -8,6 +8,7 @@ using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.ApplicationInsights;
 using Microsoft.WindowsAzure.MobileServices;
 using Petrolhead.Services.AuthenticationService;
+using System.Diagnostics;
 
 namespace Petrolhead
 {
@@ -78,10 +79,12 @@ new MobileServiceClient(
 
             if (!AuthHelper.IsCachedCredentialsAvailable())
             {
+                Debug.WriteLine("App.OnStartAsync() : no cached credentials available, loading login page...");
                 NavigationService.Navigate(typeof(Views.LoginPage));
             }
             else
             {
+                Debug.WriteLine("App.OnStartAsync() : cached credentials found, bypassing login page...");
                 await AuthHelper.AuthenticateAsync();
                 NavigationService.Navigate(typeof(Views.MainPage));
             }
