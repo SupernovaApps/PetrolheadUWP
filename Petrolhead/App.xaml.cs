@@ -18,7 +18,7 @@ namespace Petrolhead
     sealed partial class App : Template10.Common.BootStrapper
     {
         private static SettingsService _settings = SettingsService.Instance;
-        public static SettingsService Settings { get { return _settings; } set { Set(ref _settings, value); } }
+        public static SettingsService Settings { get { return _settings; } set { _settings = value; } }
         public App()
         {
 
@@ -87,7 +87,16 @@ new MobileServiceClient(
             {
                 Debug.WriteLine("App.OnStartAsync() : cached credentials found, bypassing login page...");
                 await AuthHelper.AuthenticateAsync();
-                NavigationService.Navigate(typeof(Views.MainPage));
+                if (Settings.IsAlreadyConfigured)
+                {
+                    Debug.WriteLine("App.OnStartAsync() : already set up, skipping to MainPage...");
+                    NavigationService.Navigate(typeof(Views.MainPage));
+                }
+                else
+                {
+                    Debug.WriteLine("App.OnStartAsync() : not configured, starting setup wizard...");
+                    NavigationService.Navigate(typeof(Views.SetupWizardHomePage));
+                }
             }
             
             
