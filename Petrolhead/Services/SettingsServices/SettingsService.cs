@@ -50,6 +50,19 @@ namespace Petrolhead.Services.SettingsServices
             }
         }
 
+        public bool IsAlreadyConfigured
+        {
+            get
+            {
+                return _helper.Read(nameof(IsAlreadyConfigured), false, Template10.Services.SettingsService.SettingsStrategies.Roam);
+
+            }
+            set
+            {
+                _helper.Write(nameof(IsAlreadyConfigured), value, Template10.Services.SettingsService.SettingsStrategies.Roam);
+            }
+        }
+
         public TimeSpan CacheMaxDuration
         {
             get { return _helper.Read<TimeSpan>(nameof(CacheMaxDuration), TimeSpan.FromDays(2)); }

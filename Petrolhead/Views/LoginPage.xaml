@@ -33,7 +33,7 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
-            <TextBlock RelativePanel.Below="Authenticate" RelativePanel.AlignHorizontalCenterWith="Authenticate" Text="{Binding ErrorText, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" />
+            <TextBlock RelativePanel.Below="Authenticate" TextWrapping="Wrap" RelativePanel.AlignHorizontalCenterWith="Authenticate" Text="{Binding ErrorText, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" />
         </RelativePanel>
     </Grid>
 </Page>

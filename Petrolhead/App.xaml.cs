@@ -17,7 +17,8 @@ namespace Petrolhead
 
     sealed partial class App : Template10.Common.BootStrapper
     {
-        
+        private static SettingsService _settings = SettingsService.Instance;
+        public static SettingsService Settings { get { return _settings; } set { Set(ref _settings, value); } }
         public App()
         {
 

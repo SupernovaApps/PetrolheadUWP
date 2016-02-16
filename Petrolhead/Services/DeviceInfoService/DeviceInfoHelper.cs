@@ -32,9 +32,11 @@ namespace Petrolhead.Services.DeviceInfoService
             NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
         }
 
-        private void NetworkInformation_NetworkStatusChanged(object sender)
+        private async void NetworkInformation_NetworkStatusChanged(object sender)
         {
-            GetConnectionStatus();
+            // change network connection status in the background
+            await Task.Run(new Action(GetConnectionStatus));
+            
         }
 
         protected virtual void GetConnectionStatus()

@@ -71,7 +71,18 @@ namespace Petrolhead.ViewModels
             
             if (await AuthenticateAsync())
             {
-                NavigationService.Navigate(typeof(Views.MainPage));
+                if (App.Settings.IsAlreadyConfigured == false)
+                {
+
+                    NavigationService.Navigate(typeof(Views.SetupWizardHomePage));
+                    NavigationService.ClearHistory();
+                }
+                else
+                {
+                    NavigationService.Navigate(typeof(Views.MainPage));
+                    NavigationService.ClearHistory();
+                }
+                
             }
             else
             {
